@@ -1,69 +1,30 @@
 import wikipedia, click, time, getpass, sys, re
 
 
-def obtntime():
-    timestmp = time.localtime()
-    timehour = str(timestmp.tm_hour)
-    timemint = str(timestmp.tm_min)
-    timesecs = str(timestmp.tm_sec)
-    if int(timehour) < 10:  timehour = "0" + timehour
-    if int(timemint) < 10:  timemint = "0" + timemint
-    if int(timesecs) < 10:  timesecs = "0" + timesecs
-    return timehour + ":" + timemint + ":" + timesecs
-
-
-'''
-['_WikipediaPage__continued_query',
- '_WikipediaPage__load',
- '_WikipediaPage__title_query_param',
- '__class__',
- '__delattr__',
- '__dict__',
- '__dir__',
- '__doc__',
- '__eq__',
- '__format__',
- '__ge__',
- '__getattribute__',
- '__gt__',
- '__hash__',
- '__init__',
- '__init_subclass__',
- '__le__',
- '__lt__',
- '__module__',
- '__ne__',
- '__new__',
- '__reduce__',
- '__reduce_ex__',
- '__repr__',
- '__setattr__',
- '__sizeof__',
- '__str__',
- '__subclasshook__',
- '__weakref__',
- 'categories',
- 'content',
- 'coordinates',
- 'html',
- 'images',
- 'links',
- 'original_title',
- 'pageid',
- 'parent_id',
- 'references',
- 'revision_id',
- 'section',
- 'sections',
- 'summary',
- 'title',
- 'url']
-'''
-
-
 class wikiclss():
     def __init__(self, srchqery):
         self.srchqery = srchqery
+
+    def obtntime(self):
+        timestmp = time.localtime()
+        timehour = str(timestmp.tm_hour)
+        timemint = str(timestmp.tm_min)
+        timesecs = str(timestmp.tm_sec)
+        if int(timehour) < 10:  timehour = "0" + timehour
+        if int(timemint) < 10:  timemint = "0" + timemint
+        if int(timesecs) < 10:  timesecs = "0" + timesecs
+        return timehour + ":" + timemint + ":" + timesecs
+
+    def prsehead(self, purltext):
+        while re.search("===== (.*) =====", purltext):
+            purltext = purltext.replace("\n===== " + re.search("===== (.*) =====", purltext).group(1) + " =====", click.style(re.search("===== (.*) =====", purltext).group(1) + " > ", fg="green", bold=True))
+        while re.search("==== (.*) ====", purltext):
+            purltext = purltext.replace("\n==== " + re.search("==== (.*) ====", purltext).group(1) + " ====", click.style(re.search("==== (.*) ====", purltext).group(1) + " > ", fg="blue", bold=True))
+        while re.search("=== (.*) ===", purltext):
+            purltext = purltext.replace("\n=== " + re.search("=== (.*) ===", purltext).group(1) + " ===", click.style(re.search("=== (.*) ===", purltext).group(1) + " > ", fg="red", bold=True))
+        while re.search("== (.*) ==", purltext):
+            purltext = purltext.replace("\n== " + re.search("== (.*) ==", purltext).group(1) + " ==", click.style(re.search("== (.*) ==", purltext).group(1) + " > ", fg="magenta", bold=True))
+        return purltext
 
     def getpgurl(self):
         if self.srchqery is None:
@@ -76,7 +37,7 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("URL > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -91,7 +52,7 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("TITLE > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -113,7 +74,7 @@ class wikiclss():
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("LINKS > ", fg="blue", bold=True))
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -128,7 +89,7 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("SUMMARY > ", fg="blue", bold=True) + "\n" + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -145,7 +106,7 @@ class wikiclss():
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REFERENCES > ", fg="blue", bold=True))
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -162,7 +123,7 @@ class wikiclss():
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("IMAGES > ", fg="blue", bold=True))
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -177,7 +138,7 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PAGEID > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -191,8 +152,8 @@ class wikiclss():
                 purltext = wikipedia.page(self.srchqery).revision_id
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REVISIONID > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REVISIONID > ", fg="blue", bold=True) + str(purltext))
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -206,8 +167,8 @@ class wikiclss():
                 purltext = wikipedia.page(self.srchqery).parent_id
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PARENTID > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PARENTID > ", fg="blue", bold=True) + str(purltext))
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -221,17 +182,11 @@ class wikiclss():
                 purltext = wikipedia.page(self.srchqery).content
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
-                while re.search("==== (.*) ====", purltext):
-                    purltext = purltext.replace("==== " + re.search("==== (.*) ====", purltext).group(1) + " ====", click.style(re.search("==== (.*) ====", purltext).group(1) + " > ", fg="blue", bold=True))
-                while re.search("=== (.*) ===", purltext):
-                    purltext = purltext.replace("=== " + re.search("=== (.*) ===", purltext).group(1) + " ===", click.style(re.search("=== (.*) ===", purltext).group(1) + " > ", fg="red", bold=True))
-                while re.search("== (.*) ==", purltext):
-                    purltext = purltext.replace("== " + re.search("== (.*) ==", purltext).group(1) + " ==", click.style(re.search("== (.*) ==", purltext).group(1) + " > ", fg="magenta", bold=True))
+                purltext = self.prsehead(purltext)
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CONTENT > ", fg="blue", bold=True) + "\n" + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
-                click.echo(expt)
 
     def getpgcat(self):
         if self.srchqery is None:
@@ -246,12 +201,26 @@ class wikiclss():
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CATEGORIES > ", fg="blue", bold=True))
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds")
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except Exception as expt:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getitems(self):
-        pass
+        if self.srchqery is None:
+            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
+            sys.exit()
+        else:
+            try:
+                strttime = time.monotonic()
+                purltext = wikipedia.search(self.srchqery)
+                stoptime = time.monotonic()
+                duration = stoptime - strttime
+                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("SEARCH > ", fg="blue", bold=True))
+                for indx in range(len(purltext)):
+                    click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
+                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
+            except Exception as expt:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def wkdonate(self):
         click.echo(click.style("THANKS > ", fg="magenta", bold=True) + "for considering donating to the initiative")
