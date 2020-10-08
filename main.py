@@ -1,4 +1,9 @@
-import wikipedia, click, time, getpass, sys, re
+import click
+import getpass
+import re
+import sys
+import time
+import wikipedia
 
 
 class wikiclss():
@@ -243,7 +248,7 @@ class wikiclss():
 @click.option("-e", "--getitems", "wkaction", flag_value="getitems", help="Get list of search results", required=True)
 @click.option("-o", "--wkdonate", "wkaction", flag_value="wkdonate", help="Donate to the Wikimedia project", required=True)
 @click.option("-q", "--srchqery", "srchqery", help="Enter the query you wish to search for")
-@click.version_option(version="08102020", prog_name="Wisdom by t0xic0der")
+@click.version_option(version="09102020", prog_name="Wisdom by t0xic0der")
 def mainfunc(srchqery, wkaction):
     click.echo(click.style("WISDOM > ", fg="green", bold=True) + "Welcome " + getpass.getuser() + ", please wait while the results are obtained.")
     wikiobjc = wikiclss(srchqery)
