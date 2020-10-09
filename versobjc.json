@@ -1,0 +1,16 @@
+{
+    "curtvers": {
+        "versqant": "10102020",
+        "featsadd": "LSBBZGRlZCBwYWdlciBzdXBwb3J0IGZvciBsb25nIHJlc3VsdHMKLSBBZGRlZCBzYXZlIHBhZ2UgdG8gSFRNTCBmaWxlIG9wdGlvbgotIENvbG9yZWQgdGhlIGNvbW1hbmQtbGluZSBoZWxwIG1lbnU="
+    },
+    "prevvers": {
+        "0": {
+            "versqant": "09102020",
+            "featsadd": "LSBBZGRlZCBmZWF0dXJlIHRvIHJldHJpZXZlIHBhZ2UgVVJMLCB0aXRsZSBhbmQgc3VtbWFyeSBpZiB0aGV5IGV4aXN0Ci0gQWRkZWQgZmVhdHVyZSB0byByZXRyaWV2ZSBsaXN0IG9mIGxpbmtzLCByZWZlcmVuY2VzLCBpbWFnZXMgYW5kIHNlYXJjaCByZXN1bHRzCi0gQWRkZWQgZmVhdHVyZSB0byByZXRyaWV2ZSBtaXNjZWxsYW5lb3VzIGlkZW50aXR5IGRldGFpbHMKLSBBZGRlZCBiYXNpYyBoZWFkZXIgcGFyc2luZyB1c2luZyByZWd1bGFyIGV4cHJlc3Npb24KLSBBZGRlZCBvcHRpb24gdG8gb3BlbiBkb25hdGlvbiBwYWdlIGZvciB0aGUgaW5pdGlhdGl2ZQ=="
+        },
+        "1": {
+            "versqant": "08102020",
+            "featsadd": "LSBUZXN0ZWQgY2FwYWJpbGl0aWVzIG9mIHRoZSBtb2R1bGVzCi0gUmVtb3ZlZCBQcm9tcHQgVG9vbGtpdCBmcm9tIHRoZSBkZXBlbmRlbmNpZXMgc2V0Ci0gQWRkZWQgQU5TSSBjb2xvcnMgdG8gQ0xJIHRleHQgZWxlbWVudHM="
+        }
+    }
+}
