@@ -139,7 +139,7 @@ class wikiclss():
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutErro:
+            except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
