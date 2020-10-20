@@ -43,7 +43,9 @@ class wikiclss():
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("URL > ", fg="blue", bold=True) + purltext)
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def gettitle(self):
@@ -58,7 +60,9 @@ class wikiclss():
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("TITLE > ", fg="blue", bold=True) + purltext)
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def savehtml(self):
@@ -80,7 +84,9 @@ class wikiclss():
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getshort(self):
@@ -95,7 +101,9 @@ class wikiclss():
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("SUMMARY > ", fg="blue", bold=True) + "\n" + purltext)
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getcreds(self):
@@ -112,7 +120,9 @@ class wikiclss():
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getimage(self):
@@ -129,7 +139,9 @@ class wikiclss():
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getpgeid(self):
@@ -144,7 +156,9 @@ class wikiclss():
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PAGEID > ", fg="blue", bold=True) + purltext)
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getrevid(self):
@@ -159,7 +173,9 @@ class wikiclss():
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REVISIONID > ", fg="blue", bold=True) + str(purltext))
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getprtid(self):
@@ -174,7 +190,9 @@ class wikiclss():
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PARENTID > ", fg="blue", bold=True) + str(purltext))
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getdcont(self):
@@ -190,7 +208,9 @@ class wikiclss():
                 purltext = self.prsehead(purltext)
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CONTENT > ", fg="blue", bold=True) + "\n" + purltext)
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getpgcat(self):
@@ -207,7 +227,9 @@ class wikiclss():
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def getitems(self):
@@ -224,7 +246,9 @@ class wikiclss():
                 for indx in range(len(purltext)):
                     click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except Exception as expt:
+            except wikipedia.exceptions.HTTPTimeoutError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
     def wkdonate(self):
