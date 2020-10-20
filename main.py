@@ -45,6 +45,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -62,6 +64,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -86,6 +90,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -103,6 +109,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -122,6 +130,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -141,6 +151,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -158,6 +170,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -175,6 +189,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -192,6 +208,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -210,6 +228,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -229,6 +249,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -248,6 +270,8 @@ class wikiclss():
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Wikipedia page cannot be found for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
