@@ -47,6 +47,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -66,6 +68,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -92,6 +96,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -111,6 +117,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -132,6 +140,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -153,6 +163,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -172,6 +184,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -191,6 +205,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -210,6 +226,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -230,6 +248,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -251,6 +271,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
@@ -272,6 +294,8 @@ class wikiclss():
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
             except wikipedia.exceptions.RedirectError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
+            except wikipedia.exceptions.PageError:
+                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the wikipedia page for the query.")
             except Exception:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
