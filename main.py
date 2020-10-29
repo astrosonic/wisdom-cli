@@ -97,8 +97,9 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("LINKS > ", fg="blue", bold=True))
+                max_width = len(str(len(purltext)))+1
                 for indx in range(len(purltext)):
-                    click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
+                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
@@ -149,8 +150,9 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REFERENCES > ", fg="blue", bold=True))
+                max_width=len(str(len(purltext)))+1
                 for indx in range(len(purltext)):
-                    click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
+                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
@@ -176,8 +178,9 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("IMAGES > ", fg="blue", bold=True))
+                max_width = len(str(len(purltext)))+1
                 for indx in range(len(purltext)):
-                    click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
+                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
@@ -304,8 +307,9 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CATEGORIES > ", fg="blue", bold=True))
+                max_width = len(str(len(purltext)))+1
                 for indx in range(len(purltext)):
-                    click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
+                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
@@ -331,8 +335,9 @@ class wikiclss():
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("SEARCH > ", fg="blue", bold=True))
+                max_width = len(str(len(purltext)))+1
                 for indx in range(len(purltext)):
-                    click.echo(click.style("#" + str(indx+1), fg="magenta", bold=True) + " " + purltext[indx])
+                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.HTTPTimeoutError:
                 click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
