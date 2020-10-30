@@ -6,355 +6,160 @@ import time
 import wikipedia
 
 
-class wikiclss():
-    def __init__(self, srchqery):
-        self.srchqery = srchqery
+def printMessage(styled="CAVEAT > ",color="red",message=""):
+    click.echo(click.style(styled,fg=color,bold=True)+message)
 
-    def obtntime(self):
-        timestmp = time.localtime()
-        timehour = str(timestmp.tm_hour)
-        timemint = str(timestmp.tm_min)
-        timesecs = str(timestmp.tm_sec)
-        if int(timehour) < 10:  timehour = "0" + timehour
-        if int(timemint) < 10:  timemint = "0" + timemint
-        if int(timesecs) < 10:  timesecs = "0" + timesecs
-        return timehour + ":" + timemint + ":" + timesecs
+def obtntime():
+    timestmp = time.localtime()
+    timehour = str(timestmp.tm_hour)
+    timemint = str(timestmp.tm_min)
+    timesecs = str(timestmp.tm_sec)
+    if int(timehour) < 10:  timehour = "0" + timehour
+    if int(timemint) < 10:  timemint = "0" + timemint
+    if int(timesecs) < 10:  timesecs = "0" + timesecs
+    return timehour + ":" + timemint + ":" + timesecs
 
-    def prsehead(self, purltext):
-        while re.search("===== (.*) =====", purltext):
-            purltext = purltext.replace("\n===== " + re.search("===== (.*) =====", purltext).group(1) + " =====", click.style(re.search("===== (.*) =====", purltext).group(1) + " > ", fg="green", bold=True))
-        while re.search("==== (.*) ====", purltext):
-            purltext = purltext.replace("\n==== " + re.search("==== (.*) ====", purltext).group(1) + " ====", click.style(re.search("==== (.*) ====", purltext).group(1) + " > ", fg="blue", bold=True))
-        while re.search("=== (.*) ===", purltext):
-            purltext = purltext.replace("\n=== " + re.search("=== (.*) ===", purltext).group(1) + " ===", click.style(re.search("=== (.*) ===", purltext).group(1) + " > ", fg="red", bold=True))
-        while re.search("== (.*) ==", purltext):
-            purltext = purltext.replace("\n== " + re.search("== (.*) ==", purltext).group(1) + " ==", click.style(re.search("== (.*) ==", purltext).group(1) + " > ", fg="magenta", bold=True))
-        return purltext
+def prsehead(srchqery, purltext):
+    while re.search("===== (.*) =====", purltext):
+        purltext = purltext.replace("\n===== " + re.search("===== (.*) =====", purltext).group(1) + " =====", click.style(re.search("===== (.*) =====", purltext).group(1) + " > ", fg="green", bold=True))
+    while re.search("==== (.*) ====", purltext):
+        purltext = purltext.replace("\n==== " + re.search("==== (.*) ====", purltext).group(1) + " ====", click.style(re.search("==== (.*) ====", purltext).group(1) + " > ", fg="blue", bold=True))
+    while re.search("=== (.*) ===", purltext):
+        purltext = purltext.replace("\n=== " + re.search("=== (.*) ===", purltext).group(1) + " ===", click.style(re.search("=== (.*) ===", purltext).group(1) + " > ", fg="red", bold=True))
+    while re.search("== (.*) ==", purltext):
+        purltext = purltext.replace("\n== " + re.search("== (.*) ==", purltext).group(1) + " ==", click.style(re.search("== (.*) ==", purltext).group(1) + " > ", fg="magenta", bold=True))
+    return purltext
 
-    def getpgurl(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).url
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("URL > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
-    def gettitle(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).title
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("TITLE > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def getpgurl(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).url
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("URL > ", fg="blue", bold=True) + purltext)
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
 
-    def savehtml(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
 
-    def getlinks(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).links
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("LINKS > ", fg="blue", bold=True))
-                max_width = len(str(len(purltext)))+1
-                for indx in range(len(purltext)):
-                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def gettitle(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).title
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("TITLE > ", fg="blue", bold=True) + purltext)
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
 
-    def getshort(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).summary
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("SUMMARY > ", fg="blue", bold=True) + "\n" + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def savehtml(srchqery):
+    pass
 
-    def getcreds(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).references
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REFERENCES > ", fg="blue", bold=True))
-                max_width=len(str(len(purltext)))+1
-                for indx in range(len(purltext)):
-                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
-    def getimage(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).images
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("IMAGES > ", fg="blue", bold=True))
-                max_width = len(str(len(purltext)))+1
-                for indx in range(len(purltext)):
-                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def getlinks(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).links
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("LINKS > ", fg="blue", bold=True))
+    max_width = len(str(len(purltext)))+1
+    for indx,val in enumerate(purltext,1):
+        printMessage(f"#{indx}".rjust(max_width),"magenta"," " + val)
+    printMessage("RAISED > ","green",str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
 
-    def getpgeid(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).pageid
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PAGEID > ", fg="blue", bold=True) + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
-    def getrevid(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).revision_id
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("REVISIONID > ", fg="blue", bold=True) + str(purltext))
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def getshort(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).summary
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("SUMMARY > ", fg="blue", bold=True) + "\n" + purltext)
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
 
-    def getprtid(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).parent_id
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("PARENTID > ", fg="blue", bold=True) + str(purltext))
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
-    def getdcont(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).content
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                purltext = self.prsehead(purltext)
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CONTENT > ", fg="blue", bold=True) + "\n" + purltext)
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def getcreds(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).references
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("REFERENCES > ", fg="blue", bold=True))
+    max_width=len(str(len(purltext)))+1
+    for indx,val in enumerate(purltext,1):
+        printMessage(f"#{indx}".rjust(max_width),"magenta"," " + val)
+    printMessage("RAISED > ","green",str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
 
-    def getpgcat(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.page(self.srchqery).categories
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CATEGORIES > ", fg="blue", bold=True))
-                max_width = len(str(len(purltext)))+1
-                for indx in range(len(purltext)):
-                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
 
-    def getitems(self):
-        if self.srchqery is None:
-            click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "You do not seem to have provided a search query")
-            sys.exit()
-        else:
-            try:
-                strttime = time.monotonic()
-                purltext = wikipedia.search(self.srchqery)
-                stoptime = time.monotonic()
-                duration = stoptime - strttime
-                click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("SEARCH > ", fg="blue", bold=True))
-                max_width = len(str(len(purltext)))+1
-                for indx in range(len(purltext)):
-                    click.echo(click.style(f"#{indx+1}".rjust(max_width), fg="magenta", bold=True) + " " + purltext[indx])
-                click.echo(click.style("RAISED > ", fg="green", bold=True) + str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
-            except wikipedia.exceptions.HTTPTimeoutError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Timeout occured while processing the query.")
-            except wikipedia.exceptions.RedirectError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Page title unexpectedly resolved to a redirect.")
-            except wikipedia.exceptions.PageError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Couldn't find the Wikipedia page for the query.")
-            except wikipedia.exceptions.DisambiguationError:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "The query resolves to a Disambiguation page.")
-            except wikipedia.exceptions.WikipediaException:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Base Wikipedia exception class.")
-            except Exception:
-                click.echo(click.style("CAVEAT > ", fg="red", bold=True) + "Exception occurred due to which results could not be displayed")
+def getimage(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).images
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("IMAGES > ", fg="blue", bold=True))
+    max_width = len(str(len(purltext)))+1
+    for indx,val in enumerate(purltext,1):
+        printMessage(f"#{indx}".rjust(max_width),"magenta"," " + val)
+    printMessage("RAISED > ","green",str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
 
-    def wkdonate(self):
-        click.echo(click.style("THANKS > ", fg="magenta", bold=True) + "for considering donating to the initiative")
-        wikipedia.donate()
+
+def getpgeid(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).pageid
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("PAGEID > ", fg="blue", bold=True) + purltext)
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
+
+
+def getrevid(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).revision_id
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("REVISIONID > ", fg="blue", bold=True) + str(purltext))
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
+
+
+def getprtid(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).parent_id
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("PARENTID > ", fg="blue", bold=True) + str(purltext))
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
+
+
+def getdcont(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).content
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    purltext = prsehead(purltext)
+    printMessage("RESULT > ","green",click.style("CONTENT > ", fg="blue", bold=True) + "\n" + purltext)
+    printMessage("RAISED > ","green","1 result in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
+
+
+def getpgcat(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.page(srchqery).categories
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("CATEGORIES > ", fg="blue", bold=True))
+    max_width = len(str(len(purltext)))+1
+    for indx,val in enumerate(purltext,1):
+        printMessage(f"#{indx}".rjust(max_width),"magenta"," " + val)
+    printMessage("RAISED > ","green",str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
+
+
+def getitems(srchqery):
+    strttime = time.monotonic()
+    purltext = wikipedia.search(srchqery)
+    stoptime = time.monotonic()
+    duration = stoptime - strttime
+    printMessage("RESULT > ","green",click.style("SEARCH > ", fg="blue", bold=True))
+    max_width = len(str(len(purltext)))+1
+    for indx,val in enumerate(purltext,1):
+        printMessage(f"#{indx}".rjust(max_width),"magenta"," " + val)
+    printMessage("RAISED > ","green",str(len(purltext)) + " result(s) in " + str(duration)[0:3] + " seconds [" + obtntime() + "]")
+
+def wkdonate():
+    printMessage("THANKS > ","magenta","for considering donating to the initiative")
+    wikipedia.donate()
 
 
 @click.command()
@@ -375,22 +180,24 @@ class wikiclss():
 @click.option("-q", "--srchqery", "srchqery", help="Enter the query you wish to search for")
 @click.version_option(version="09102020", prog_name="Wisdom CLI by t0xic0der")
 def mainfunc(srchqery, wkaction):
-    click.echo(click.style("WISDOM > ", fg="green", bold=True) + "Welcome " + getpass.getuser() + ", please wait while the results are obtained.")
-    wikiobjc = wikiclss(srchqery)
-    if wkaction == "getpgurl":      wikiobjc.getpgurl()
-    elif wkaction == "gettitle":    wikiobjc.gettitle()
-    elif wkaction == "savehtml":    wikiobjc.savehtml()
-    elif wkaction == "getlinks":    wikiobjc.getlinks()
-    elif wkaction == "getshort":    wikiobjc.getshort()
-    elif wkaction == "getcreds":    wikiobjc.getcreds()
-    elif wkaction == "getimage":    wikiobjc.getimage()
-    elif wkaction == "getpgeid":    wikiobjc.getpgeid()
-    elif wkaction == "getrevid":    wikiobjc.getrevid()
-    elif wkaction == "getprtid":    wikiobjc.getprtid()
-    elif wkaction == "getdcont":    wikiobjc.getdcont()
-    elif wkaction == "getpgcat":    wikiobjc.getpgcat()
-    elif wkaction == "getitems":    wikiobjc.getitems()
-    elif wkaction == "wkdonate":    wikiobjc.wkdonate()
+    printMessage("WISDOM > ","green","Welcome " + getpass.getuser() + ", please wait while the results are obtained.")
+    if wkaction == "wkdonate":
+        wkdonate()
+    else:
+        try:
+            eval(wkaction)(srchqery)
+        except wikipedia.exceptions.DisambiguationError:
+            printMessage(message="The query resolves to a Disambiguation page.")
+        except wikipedia.exceptions.HTTPTimeoutError:
+            printMessage(message="Timeout occured while processing the query.")
+        except wikipedia.exceptions.RedirectError:
+            printMessage(message="Page title unexpectedly resolved to a redirect.")
+        except wikipedia.exceptions.PageError:
+            printMessage(message="Couldn't find the Wikipedia page for the query.")
+        except wikipedia.exceptions.WikipediaException:
+            printMessage(message="Base Wikipedia exception class.")
+        except Exception:
+            printMessage(message="Exception occurred due to which results could not be displayed")
 
 
 if __name__ == "__main__":
