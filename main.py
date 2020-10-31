@@ -161,7 +161,6 @@ def wkdonate():
     printMessage("THANKS > ","magenta","for considering donating to the initiative")
     wikipedia.donate()
 
-
 @click.command()
 @click.option("-u", "--getpgurl", "wkaction", flag_value="getpgurl", help="Get page URL if such page exists", required=True)
 @click.option("-t", "--gettitle", "wkaction", flag_value="gettitle", help="Get page title if such page exists", required=True)
