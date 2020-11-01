@@ -24,11 +24,10 @@ def wrap_paragraph(paragraph, max_width, indent=9):
     paragraph_width = len(paragraph)
     width = max_width - indent
 
-    wrapped_paragraph += paragraph[0 : max_width]
-    for i in range(max_width, paragraph_width, width):
+    #wrapped_paragraph += paragraph[0 : max_width]
+    for i in range(0, paragraph_width, width):
         wrapped_paragraph += indent_text
         wrapped_paragraph += paragraph[i : i + width]
-        #if i < paragraph_width - width:
         wrapped_paragraph += '\n'
 
     return wrapped_paragraph
