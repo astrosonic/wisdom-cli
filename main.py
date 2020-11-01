@@ -4,7 +4,7 @@ import re
 import sys
 import time
 import wikipedia
-
+from utils import wrap_text
 
 class wikiclss():
     def __init__(self, srchqery):
@@ -280,7 +280,7 @@ class wikiclss():
                 purltext = wikipedia.page(self.srchqery).content
                 stoptime = time.monotonic()
                 duration = stoptime - strttime
-                purltext = self.prsehead(purltext)
+                purltext = wrap_text(self.prsehead(purltext))
                 click.echo(click.style("RESULT > ", fg="green", bold=True) + click.style("CONTENT > ", fg="blue", bold=True) + "\n" + purltext)
                 click.echo(click.style("RAISED > ", fg="green", bold=True) + "1 result in " + str(duration)[0:3] + " seconds [" + self.obtntime() + "]")
             except wikipedia.exceptions.PageError:
